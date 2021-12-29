@@ -20,6 +20,8 @@ package eu.hansolo.fx.heatmap;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -32,14 +34,16 @@ public class Demo extends Application {
     }
 
     @Override public void start(final Stage stage) {
-        StackPane pane = new StackPane(heatMap);
+        StackPane pane = new StackPane(heatMap, new Label("Click to add spot"));
         heatMap.addSpot(100, 100);
         heatMap.addSpot(105, 105);
         heatMap.addSpot(200, 200);
         heatMap.addSpot(200, 200);
 
         Scene scene = new Scene(pane, 400, 400);
+        scene.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> heatMap.addSpot(e.getSceneX(), e.getSceneY()));
 
+        stage.setTitle("HeatMap");
         stage.setScene(scene);
         stage.show();
         stage.centerOnScreen();
