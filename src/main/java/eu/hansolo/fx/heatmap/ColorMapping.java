@@ -38,6 +38,10 @@ public enum ColorMapping implements Mapping {
     GREEN_BLACK_RED(new Stop(0.0, Color.rgb(9, 98, 16)), new Stop(0.25, Color.rgb(41, 251, 56)), new Stop(0.5, Color.rgb(0, 0, 0)), new Stop(0.75, Color.rgb(252, 20, 27)), new Stop(1.0, Color.rgb(142, 6, 10))),
     GREEN_YELLOW_RED(new Stop(0.0, Color.rgb(9, 98, 16)), new Stop(0.25, Color.rgb(41, 251, 56)), new Stop(0.5, Color.rgb(255, 255, 63)), new Stop(0.75, Color.rgb(252, 20, 27)), new Stop(1.0, Color.rgb(142, 6, 10))),
     RAINBOW(new Stop(0.0, Color.rgb(142, 6, 10)), new Stop(0.125, Color.rgb(252, 20, 27)), new Stop(0.25, Color.rgb(253, 163, 43)), new Stop(0.375, Color.rgb(255, 251, 63)), new Stop(0.5, Color.rgb(41, 251, 56)), new Stop(0.625, Color.rgb(12, 51, 250)), new Stop(0.75, Color.rgb(3, 23, 136)), new Stop(0.875, Color.rgb(74, 22, 127)), new Stop(1.0, Color.rgb(240, 136, 235))),
+    BLUE_RED_YELLOW(new Stop(0.0, Color.rgb(0, 0, 39)), new Stop(0.4, Color.rgb(1, 43, 111)), new Stop(0.75, Color.rgb(223, 4, 86)), new Stop(1.0, Color.rgb(255, 247, 7))),
+    BLUE_PURPLE_ORANGE_YELLOW(new Stop(0.0, Color.rgb(13, 32, 135)), new Stop(0.25, Color.rgb(117, 33, 168)), new Stop(0.5, Color.rgb(206, 74, 118)), new Stop(0.75, Color.rgb(249, 154, 62)), new Stop(1.0, Color.rgb(240, 249, 38))),
+    BLACK_BLUE_PURPLE_ORANGE_YELLOW(new Stop(0.0, Color.rgb(0, 0, 0)), new Stop(0.2, Color.rgb(39, 11, 83)), new Stop(0.4, Color.rgb(116, 26, 110)), new Stop(0.5, Color.rgb(192, 58, 81)), new Stop(0.65, Color.rgb(247, 129, 17)), new Stop(0.85, Color.rgb(246, 214, 67)), new Stop(1.0, Color.rgb(254, 254, 187))),
+    PURPLE_BLUE_GREEN_YELLOW(new Stop(0.0, Color.rgb(79, 19, 88)), new Stop(0.25, Color.rgb(55, 91, 141)), new Stop(0.5, Color.rgb(34, 146, 140)), new Stop(0.75, Color.rgb(113, 208, 86)), new Stop(1.0, Color.rgb(251, 231, 42))),
     BLACK_WHITE(new Stop(0.0, Color.BLACK), new Stop(1.0, Color.WHITE)),
     WHITE_BLACK(new Stop(0.0, Color.WHITE), new Stop(1.0, Color.BLACK));
 

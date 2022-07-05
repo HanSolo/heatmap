@@ -30,7 +30,7 @@ public class Demo extends Application {
     private HeatMap heatMap;
 
     @Override public void init() {
-        heatMap = new HeatMap(400, 400, ColorMapping.LIME_YELLOW_RED, 15.5, true, 0.5, OpacityDistribution.LINEAR);
+        heatMap = new HeatMap(400, 400, ColorMapping.BLUE_RED_YELLOW, 15.5, true, 0.5, OpacityDistribution.EXPONENTIAL);
     }
 
     @Override public void start(final Stage stage) {
