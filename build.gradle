@@ -41,7 +41,7 @@ dependencies {
     implementation "org.openjfx:javafx-controls:${javafxVersion}:${platform}"
     implementation "org.openjfx:javafx-swing:${javafxVersion}:${platform}"
     implementation "eu.hansolo:toolbox:17.0.45"
-    implementation "eu.hansolo:toolboxfx:17.0.35"
+    implementation "eu.hansolo:toolboxfx:17.0.37"
 }
 
 
