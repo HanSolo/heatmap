@@ -98,24 +98,19 @@ public class HeatMapBuilder<B extends HeatMapBuilder<B>> {
         OpacityDistribution opacityDistribution = OpacityDistribution.CUSTOM;
 
         for (String key : properties.keySet()) {
-            if ("prefSize".equals(key)) {
-                Dimension2D dim = ((ObjectProperty<Dimension2D>) properties.get(key)).get();
-                width  = dim.getWidth();
-                height = dim.getHeight();
-            } else if ("width".equals(key)) {
-                width = ((DoubleProperty) properties.get(key)).get();
-            } else if ("height".equals(key)) {
-                height = ((DoubleProperty) properties.get(key)).get();
-            } else if ("colorMapping".equals(key)) {
-                colorMapping = ((ObjectProperty<Mapping>) properties.get(key)).get();
-            } else if ("spotRadius".equals(key)) {
-                spotRadius = ((DoubleProperty) properties.get(key)).get();
-            } else if ("fadeColors".equals(key)) {
-                fadeColors = ((BooleanProperty) properties.get(key)).get();
-            } else if ("heatMapOpacity".equals(key)) {
-                heatMapOpacity = ((DoubleProperty) properties.get(key)).get();
-            } else if ("opacityDistribution".equals(key)) {
-                opacityDistribution = ((ObjectProperty<OpacityDistribution>) properties.get(key)).get();
+            switch(key) {
+                case "prefSize"            -> {
+                    Dimension2D dim = ((ObjectProperty<Dimension2D>) properties.get(key)).get();
+                    width  = dim.getWidth();
+                    height = dim.getHeight();
+                }
+                case "width"               -> width               = ((DoubleProperty) properties.get(key)).get();
+                case "height"              -> height              = ((DoubleProperty) properties.get(key)).get();
+                case "colorMapping"        -> colorMapping        = ((ObjectProperty<Mapping>) properties.get(key)).get();
+                case "spotRadius"          -> spotRadius          = ((DoubleProperty) properties.get(key)).get();
+                case "fadeColors"          -> fadeColors          = ((BooleanProperty) properties.get(key)).get();
+                case "heatMapOpacity"      -> heatMapOpacity      = ((DoubleProperty) properties.get(key)).get();
+                case "opacityDistribution" -> opacityDistribution = ((ObjectProperty<OpacityDistribution>) properties.get(key)).get();
             }
         }
         return new HeatMap(width,  height, colorMapping, spotRadius, fadeColors, heatMapOpacity, opacityDistribution);
