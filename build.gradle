@@ -70,7 +70,7 @@ jar {
                 'Bundle-Description'    : description,
                 'Bundle-SymbolicName'   : 'eu.hansolo.fx.heatmap',
                 'Export-Package'        : 'eu.hansolo.fx.heatmap',
-                'Class-Path'            : '${project.name}-${project.version}.jar',
+                'Class-Path'            : "${project.name}-${project.version}.jar",
                 'Main-Class'            : 'eu.hansolo.fx.heatmap.Demo'
         )
     }
