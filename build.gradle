@@ -139,7 +139,7 @@ publishing {
             }
 
             pom {
-                name = 'EVT'
+                name = 'Heatmap'
                 description = 'A simple JavaFX heatmap implementation'
                 url = "https://github.com/HanSolo/heatmap/wiki"
                 licenses {
