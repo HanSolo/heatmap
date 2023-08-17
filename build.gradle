@@ -46,7 +46,7 @@ dependencies {
 }
 
 application {
-    mainClass = "eu.hansolo.fx.heatmap.Demo"
+    mainClass = "eu.hansolo.fx.heatmap.Launcher"
     mainModule = moduleName
 }
 
@@ -89,7 +89,7 @@ jar {
 
 // start the demo from gradle
 task Demo(type: JavaExec) {
-    mainClass = "eu.hansolo.fx.heatmap.Demo"
+    mainClass = "eu.hansolo.fx.heatmap.Launcher"
     classpath = sourceSets.main.runtimeClasspath
 }
 
