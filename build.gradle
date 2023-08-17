@@ -18,7 +18,6 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 description   = 'A simple JavaFX heatmap implementation'
-mainClassName = "$moduleName/eu.hansolo.fx.heatmap.Demo" // Deprecated: Old Gradle 6.4 Syntax
 
 Date buildTimeAndDate = new Date()
 ext {
