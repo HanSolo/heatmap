@@ -1,3 +1,6 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 import java.text.SimpleDateFormat
 
 plugins {
@@ -7,22 +10,22 @@ plugins {
     id 'signing'
     id 'com.google.osdetector'           version '1.7.3'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
-    id 'org.beryx.jlink'                 version '2.25.0'
+    id 'org.beryx.jlink'                 version '2.26.0'
     id 'net.nemerosa.versioning'         version '3.0.0'
 }
 
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-description = 'A simple JavaFX heatmap implementation'
-mainClassName = "$moduleName/eu.hansolo.fx.heatmap/Demo"
+description   = 'A simple JavaFX heatmap implementation'
+mainClassName = "$moduleName/eu.hansolo.fx.heatmap.Demo" // Deprecated: Old Gradle 6.4 Syntax
 
 Date buildTimeAndDate = new Date()
 ext {
     moduleName      = 'eu.hansolo.fx.heatmap'
     buildDate       = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
-    platform        = osdetector.os == 'osx' ? osdetector.arch == 'aarch_64' ? 'mac-aarch64' : 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os == 'linux' ? osdetector.arch == 'aarch_64' ? 'linux-aarch64' : 'linux' : osdetector.os
     buildTime       = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
+    platform        = osdetector.os == 'osx' ? osdetector.arch == 'aarch_64' ? 'mac-aarch64' : 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os == 'linux' ? osdetector.arch == 'aarch_64' ? 'linux-aarch64' : 'linux' : osdetector.os
     ciOssrhUsername = System.getenv('OSSRH_USERNAME')
     ciOssrhPassword = System.getenv('OSSRH_PASSWORD')
     ciGHUser        = System.getenv('GH_USER')
@@ -44,6 +47,15 @@ dependencies {
     implementation "eu.hansolo:toolboxfx:17.0.43"
 }
 
+application {
+    mainClass = "eu.hansolo.fx.heatmap.Demo"
+    mainModule = moduleName
+}
+
+java {
+    // Set to false per https://github.com/java9-modularity/gradle-modules-plugin
+    modularity.inferModulePath.set(false)
+}
 
 jar {
     from {
@@ -71,7 +83,7 @@ jar {
                 'Bundle-SymbolicName'   : 'eu.hansolo.fx.heatmap',
                 'Export-Package'        : 'eu.hansolo.fx.heatmap',
                 'Class-Path'            : "${project.name}-${project.version}.jar",
-                'Main-Class'            : 'eu.hansolo.fx.heatmap.Demo'
+                'Main-Class'            : application.mainClass
         )
     }
 }
@@ -79,7 +91,7 @@ jar {
 
 // start the demo from gradle
 task Demo(type: JavaExec) {
-    main = "eu.hansolo.fx.heatmap/Demo"
+    mainClass = "eu.hansolo.fx.heatmap.Demo"
     classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -110,6 +122,24 @@ signing {
     sign publishing.publications
 }
 
+// Remove 'thirdPartyCompatibility' from JavaFX runtimeElements variant
+// Otherwise it locks Gradle Module Metadata (GMM) to the publishing OS
+tasks.withType(GenerateModuleMetadata).configureEach {
+    doLast { _ ->
+        def gmmFile = it.outputFile.get().asFile
+        def inJson = new JsonSlurper().parseText(gmmFile.text)
+        def filteredVariant = inJson.variants.findAll { it.name == configurations.runtimeElements.name }
+        // remove "thirdPartyCompatibility" from GMM
+        filteredVariant.dependencies.first().each {
+            if (it.group == 'org.openjfx') {
+                it.remove('thirdPartyCompatibility')
+            }
+        }
+        def outJson = JsonOutput.toJson(inJson)
+        gmmFile.write(JsonOutput.prettyPrint(outJson))
+    }
+}
+
 publishing {
     publications {
         mavenCustom(MavenPublication) {
@@ -130,7 +160,7 @@ publishing {
             }
 
             pom {
-                name = 'EVT'
+                name = 'Heatmap'
                 description = 'A simple JavaFX heatmap implementation'
                 url = "https://github.com/HanSolo/heatmap/wiki"
                 licenses {
