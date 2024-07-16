@@ -108,7 +108,7 @@ public class HeatMap extends ImageView {
         registerListeners();
     }
 
-    public void registerListeners() {
+    private void registerListeners() {
         fitWidthProperty().addListener(o -> resize());
         fitHeightProperty().addListener(o -> resize());
     }
@@ -395,11 +395,6 @@ public class HeatMap extends ImageView {
             }
         }
         setImage(heatMap);
-    }
-
-    private void updateSpots() {
-        ctx.clearRect(0, 0, width, height);
-        spotList.forEach(spot -> ctx.drawImage(spotImage, spot.getX() - spotRadius, spot.getY() - spotRadius));
     }
 
     private void resize() {
